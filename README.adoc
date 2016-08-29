@@ -1,0 +1,7 @@
+= SMART COSMOS Node Build Container for Jenkins Pipeline
+SMARTRAC Technology Fletcher Inc <api@smartrac-group.com>
+
+This creates a full featured Node.JS environment for building frontend code or Node.JS services.
+
+== Copyright and License
+Code and documentation copyright 2016 Smartrac Technology Fletcher, Inc.  Code released under link:LICENSE[Apache 2.0 License].
