@@ -8,7 +8,7 @@ node {
     def tag = (env.BRANCH_NAME == 'master') ? env.BUILD_NUMBER : "snapshot-${env.BUILD_NUMBER}"
 
     stage 'docker build'
-    def nodeBuildImage = docker.build "smartcosmos/node-build-env:${tag}", "node"
+    def nodeBuildImage = docker.build "smartcosmos/node-build-env:${tag}", "."
 
     if (env.BRANCH_NAME == 'master') {
       stage 'push images'
