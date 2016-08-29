@@ -11,5 +11,8 @@ RUN useradd -r -u 1000 -d /opt/smartcosmos smartcosmos
 RUN mkdir -p /opt/smartcosmos && \
         chown -R smartcosmos /opt/smartcosmos
 
+# Webpack giving us a run for our money with non-global installs.
+RUN npm install -g webpack
+
 # switch to smartcosmos user
 USER smartcosmos
