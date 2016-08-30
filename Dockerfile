@@ -12,7 +12,11 @@ RUN mkdir -p /opt/smartcosmos && \
         chown -R smartcosmos /opt/smartcosmos
 
 # Webpack giving us a run for our money with non-global installs.
-RUN npm install -g webpack eslint eslint-plugin-babel
+RUN npm install -g webpack eslint \
+        eslint-plugin-babel eslint-plugin-import \
+        eslint-config-airbnb eslint-config-airbnb-base \
+        eslint-import-resolver-node eslint-import-resolver-webpack \
+        eslint-plugin-jsx-a11y eslint-plugin-react
 
 # switch to smartcosmos user
 USER smartcosmos
