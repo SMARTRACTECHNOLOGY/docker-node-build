@@ -16,7 +16,8 @@ RUN npm install -g webpack eslint \
         eslint-plugin-babel eslint-plugin-import \
         eslint-config-airbnb eslint-config-airbnb-base \
         eslint-import-resolver-node eslint-import-resolver-webpack \
-        eslint-plugin-jsx-a11y eslint-plugin-react
+        eslint-plugin-jsx-a11y eslint-plugin-react \
+        babel-eslint
 
 # switch to smartcosmos user
 USER smartcosmos
