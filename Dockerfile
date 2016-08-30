@@ -12,7 +12,7 @@ RUN mkdir -p /opt/smartcosmos && \
         chown -R smartcosmos /opt/smartcosmos
 
 # Webpack giving us a run for our money with non-global installs.
-RUN npm install -g webpack lint
+RUN npm install -g webpack eslint
 
 # switch to smartcosmos user
 USER smartcosmos
