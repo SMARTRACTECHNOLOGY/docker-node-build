@@ -1,4 +1,4 @@
-FROM node:6-wheezy
+FROM node:8
 
 MAINTAINER SMART COSMOS Platform Core Team
 

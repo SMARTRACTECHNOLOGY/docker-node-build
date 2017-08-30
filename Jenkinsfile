@@ -1,23 +1,33 @@
+#!/usr/bin/env groovy
+@Library('smartcosmos@v1.0.0') _
+
+def repository = "smartcosmos/node-build-env"
 
 node {
 
-  stage 'checkout'
-  checkout scm
+    def image
 
-  def tag = (env.BRANCH_NAME == 'master') ? env.BUILD_NUMBER : "snapshot-${env.BUILD_NUMBER}"
+    try {
+      checkout scm
+      def commitID = sh(returnStdout: true, script: "git rev-parse HEAD")
+      def tag = commitID.trim().take(6)
 
-  stage 'docker build'
-  def nodeBuildImage = docker.build "smartcosmos/node-build-env:${tag}", "."
+      stage ('Build'){
+        image = docker.build "${repository}:${tag}"
+      }
 
-  if (env.BRANCH_NAME == 'master') {
-    stage 'push images'
+      if (env.BRANCH_NAME == 'master') {
+        stage ('Publish') {
 
-    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials') {
-      nodeBuildImage.push('latest')
+          docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials') {
+            image.push()
+            image.push('latest')
+          }
+        }
+      }
     }
-  }
-
-  // remove images to save space
-  sh "docker rmi ${nodeBuildImage.id}"
-
+    finally {
+      // remove image to save space
+      sh "docker rmi ${image.id}"
+    }
 }
